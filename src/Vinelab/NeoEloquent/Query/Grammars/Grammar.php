@@ -57,10 +57,10 @@ class Grammar extends IlluminateGrammar {
      * @var  string  $label
      * @return string
      */
-    public function prepareLabels(array $labels)
+    public function prepareLabels(array $labels = null)
     {
         // get the labels prepared and back to a string imploded by : they go.
-        return implode('', array_map(array($this, 'wrapLabel'), $labels));
+        return implode('', array_map(array($this, 'wrapLabel'), $labels ?? []));
     }
 
     /**
@@ -84,7 +84,7 @@ class Grammar extends IlluminateGrammar {
      */
     public function prepareRelation($relation, $related)
     {
-        return "`rel_". mb_strtolower($relation) .'_'. $related ."`:`{$relation}`";
+        return "rel_". mb_strtolower($relation) .'_'. $related .":{$relation}";
     }
 
     /**
